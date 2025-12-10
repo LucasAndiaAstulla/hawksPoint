@@ -7,7 +7,7 @@ export default function Home({ navigation }) {
       <Text style={styles.title}>Bem-vindo à Home!</Text>
       <Text style={styles.subtitle}>Você conseguiu logar.</Text>
       
-      {/* Botão para Voltar (Logout) */}
+      
       <TouchableOpacity 
         style={styles.button} 
         onPress={() => navigation.goBack()}
@@ -19,9 +19,9 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
-  subtitle: { fontSize: 16, color: '#666', marginBottom: 20 },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#111111' },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10, color: '#FFFFFF' },
+  subtitle: { fontSize: 16, color: '#C7C7C7', marginBottom: 20 },
   button: { backgroundColor: '#d40f0f', padding: 10, borderRadius: 5 },
   buttonText: { color: '#fff', fontWeight: 'bold' }
 });

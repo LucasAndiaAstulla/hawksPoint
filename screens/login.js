@@ -12,16 +12,12 @@ import {
   Platform,
 } from "react-native";
 
-// Recebendo a propriedade { navigation }
 export default function Login({ navigation }) {
-  const [nome, setNome] = useState("");
+  const [Email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
   const handleLogin = () => {
-    // Aqui você pode manter o Alert para teste, ou tirar depois
-    // Alert.alert("Login", `Nome: ${nome}\nSenha: ${senha}`);
     
-    // COMANDO PARA MUDAR DE TELA:
     navigation.navigate('Home');
   };
 
@@ -30,7 +26,6 @@ export default function Login({ navigation }) {
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      {/* Atenção: Se a imagem não aparecer, verifique se o caminho ../../ está certo para sua estrutura de pastas */}
       <Image 
         style={styles.logo} 
         source={require("../assets/gaviaologo.webp")} 
@@ -38,9 +33,9 @@ export default function Login({ navigation }) {
 
       <TextInput 
         style={styles.input}
-        placeholder="Nome"
-        value={nome}
-        onChangeText={setNome}
+        placeholder="Email"
+        value={Email}
+        onChangeText={setEmail}
       />
 
       <TextInput 
@@ -51,12 +46,11 @@ export default function Login({ navigation }) {
         onChangeText={setSenha}
       />
       
-      {/* Botão ENTROU -> Vai para Home */}
+  
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
       
-      {/* Botão ESQUECI -> Vai para EsqueciSenha */}
       <TouchableOpacity 
         style={[styles.button, styles.buttonSecondary]}
         onPress={() => navigation.navigate('EsqueciSenha')}
@@ -104,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderWidth: 1.5,
     borderColor: "#D40F0F",
-    marginTop: 10, // Adicionei margem aqui também para separar os botões
+    marginTop: 10, 
   },
   buttonText: {
     color: "#fff",
