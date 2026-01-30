@@ -13,62 +13,95 @@ import {
 } from "react-native";
 
 export default function Login({ navigation }) {
-  const [Email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const handleLogin = () => {
-    
-    navigation.navigate('Home');
+  const emailLucas = "vivita333"
+  const senhaLucas = "vivita333" 
+
+  const handleLogin = async () => {
+    if (email != emailLucas || senhaLucas != emailLucas) {
+      Alert.alert("Atenção", "Por favor, preencha o email e a senha.");
+      return;
+    }
+
+    try {
+      console.log("Tentando logar com:", email);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error(error);
+      Alert.alert(
+        "Erro",
+        "Falha ao realizar login. Verifique suas credenciais."
+      );
+    }
+  };
+
+  const handleAdmLogin = () => {
+    Alert.alert("ADM", "Você está na tela de login ADM!");
+    navigation.navigate("AdmLogin");
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <Image 
-        style={styles.logo} 
-        source={require("../assets/gaviaologo.webp")} 
-      />
-
-      <TextInput 
-        style={styles.input}
-        placeholder="Email"
-        value={Email}
-        onChangeText={setEmail}
-      />
-
-      <TextInput 
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry={true}
-        value={senha}
-        onChangeText={setSenha}
-      />
+    
+    <View style={styles.mainContainer}>
       
-  
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity 
-        style={[styles.button, styles.buttonSecondary]}
-        onPress={() => navigation.navigate('EsqueciSenha')}
+      <KeyboardAvoidingView
+        style={styles.keyboardView}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <Text style={styles.buttonTextSecondary}>Esqueci a senha</Text>
+        <View style={styles.formContainer}>
+          <Image
+            style={styles.logo}
+            source={require("../assets/gaviaologo.webp")}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            secureTextEntry={true}
+            value={senha}
+            onChangeText={setSenha}
+          />
+
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Entrar</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+
+      <TouchableOpacity style={styles.admButton} onPress={handleAdmLogin}>
+        <Image style={styles.admIcon} source={require("../assets/adm.png")} />
       </TouchableOpacity>
 
       <StatusBar style="auto" />
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  keyboardView: {
+    flex: 1, 
+    width: "100%",
+  },
+  formContainer: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
   logo: {
     width: 250,
@@ -84,6 +117,7 @@ const styles = StyleSheet.create({
     borderColor: "#888",
     borderRadius: 8,
     marginBottom: 20,
+    backgroundColor: "#FAFAFA",
   },
   button: {
     backgroundColor: "#FF0000",
@@ -94,20 +128,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
   },
-  buttonSecondary: {
-    backgroundColor: "#fff",
-    borderWidth: 1.5,
-    borderColor: "#D40F0F",
-    marginTop: 10, 
-  },
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
   },
-  buttonTextSecondary: {
-    color: "#D40F0F",
-    fontWeight: "bold",
-    fontSize: 16,
+  admButton: {
+    position: "absolute",
+    bottom: 30,
+    right: 30,
+    padding: 10,
+    zIndex: 10, 
+  },
+  admIcon: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
   },
 });
